@@ -8,9 +8,6 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="Css/Estilo.css">
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js" type="text/javascript"></script>
-    <script src="jquery-Money/src/jquery.maskMoney.js" type="text/javascript"></script>
-
 </head>
 
 <body>
@@ -46,7 +43,7 @@
     <div id="modalFundo" class="hide"></div><!--fundo so modal-->
     <div id="modal" class="hide"><!--modal-->
         <div class="modalHeader"><!--cabeçalho-->
-            <button type="button" id="btnModalFechar"><img src="icone/voltar.png" alt=""></button>
+            <button type="button" id="btnModalFechar"><img src="iconesImagensGifs/voltar.png" alt=""></button>
             <h1>Cadastrar Produto</h1>
             <div id="txtCadastro">
                 <p><input id="campoID" type="hidden" name="id"></p>
@@ -64,15 +61,11 @@
         </div>
     </div>
 
-    <script src="JavaScript/Produto.js" async defer></script>
-    <script src="JavaScript/ModalCadastro.js" async defer></script>
-    <script src="JavaScript/Scprit.js" async defer></script>
-    <script src="JavaScript/Ordenar.js" async defer></script>
-    <script>
-        $(function() {
-            $(".campoPreco").maskMoney();
-        })
-    </script>
+    <script src="JS/ModalCadastro.js" async defer></script>
+    <script src="JS/CarregarIcones.js" async defer></script>
+    <script src="JS/DadosTAb.js" async defer></script>
+
+
 </body>
 
 </html>

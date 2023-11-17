@@ -64,7 +64,7 @@ span{
 }
 
 input[name='campoPesquisa'] {
-    background: url(../icone/lupaDePesquisa.png) ;
+    background: url(../iconesImagensGifs/lupaDePesquisa.png) ;
     background-repeat: no-repeat;
     background-position: top 5px left 3px;
 }
@@ -247,7 +247,7 @@ h1 {
 
 
 
-#modalFundo, #modalFundoExcluir {
+#modalFundo{
     position: fixed;
     top: 0;
     left: 0;
@@ -258,7 +258,7 @@ h1 {
 }
 
 
-#modalFundo, #modalExcluir,
+#modalFundo, 
 #modal {
     transition: 0.5s;
     opacity: 1;
@@ -268,13 +268,13 @@ h1 {
 
 /*sumir*/
 #modal.hide,
-#modalFundo.hide, #modalExcluir.esconder, #modalFundoExcluir.esconder {
+#modalFundo.hide{
     opacity: 0;
     pointer-events: none;
 }
 
 
-#modal.hide, #modalExcluir.esconder {
+#modal.hide {
     top: 0;
 }
 
