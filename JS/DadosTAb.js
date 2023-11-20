@@ -55,6 +55,23 @@ function funcaoAlterar(event) {
 }
 
 
+function funcaoDeletar(event) {
+
+    let itemClicado = event.target
+
+    let objeto = itemClicado.parentElement.parentElement.childNodes
+
+    let id = objeto[0].innerText
+
+    fetch('Php/arquivo.php?tipo=deletar&idRegistro=' + id, {
+        method: 'DELETE'
+    })
+        .then((res) => {
+           atualizarTabela();
+        })
+
+} 
+
 function limparCampoCadastro() {
     document.getElementById('campoProd').value = ''
     document.getElementById('quantidade').value = ''

@@ -1,5 +1,5 @@
 document.getElementById("btnModalCadastrar").addEventListener('click', function dadosColetados() {
-   window.cadastrar(window.coletar_dados());
+    window.cadastrar(window.coletar_dados());
 
 })
 
@@ -10,18 +10,13 @@ this.document.getElementById('btnAdicionar').addEventListener('click', function 
 })
 
 document.getElementById('alterar').addEventListener('click', function () {
-
-    console.log('entrou');
-    
     fetch('Php/arquivo.php?tipo=alterar', {
-        method: 'POST',
+        method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify( window.coletar_dados()),
+        body: JSON.stringify(window.coletar_dados()),
     }).then((res) => {
         window.atualizarTabela();
     })
-   
-   
 })
