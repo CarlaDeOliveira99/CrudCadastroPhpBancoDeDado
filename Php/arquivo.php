@@ -1,29 +1,62 @@
-<?php 
+<?php
 
-require_once('config.php');
-
-
-$statement = $pdo->query('select * from produtos.db_produtos;');
+$pdo = require_once 'config.php';
 
 
+if (isset($_GET['tipo'])) {
+    $tipo = $_GET['tipo'];
+}
 
-while (($row = $statement->fetch(PDO::FETCH_ASSOC))) {
-    print_r($row);
-    echo '<br>';
+if ($tipo == 'ler') {
+    lerDados($pdo);
+} else if ($tipo == 'cadastrar') {
+    cadastrar($pdo);
+} else if ($tipo == 'deletar') {
+  
+} else if ($tipo == 'alterar') {
+   
 }
 
 
-// $conteudoJS = file_get_contents('php://input');
+function cadastrar($pdo)
+{
+    // inserir
+    $json_convertido = json_decode(file_get_contents('php://input'), true);
+
+    $nome = $json_convertido['nome'];
+    $quantidade = $json_convertido['quantidade'];
+    $unidade = $json_convertido['unidade'];
+    $preco_compra  = $json_convertido['precoInicial'];
+    $preco_venda = $json_convertido['precoFinal'];
 
 
-// function cadastrar($conteudoJS ){
-//     $jsonJSArray = json_decode($conteudoJS, true);
+    $sql = 'INSERT INTO produto(nome,quantidade,unidade,preco_de_compra,preco_de_venda)  VALUES(:nome,:quantidade,:unidade,:preco_compra,:preco_venda)';
 
-//     $produto = $jsonJSArray['produto'];
-//     $quantidade = $jsonJSArray['quantidade'];
-//     $unidade = $jsonJSArray['unidade'];
-//     $preco_compra  = $jsonJSArray['precoInicial'];
-//     $preco_venda = $jsonJSArray['precoFinal'] ;
+    $statement = $pdo->prepare($sql);
 
-// }
-?>
+    $statement->execute([
+        ':nome' => $nome,
+        ':quantidade' => $quantidade,
+        ':unidade' => $unidade,
+        ':preco_compra' => $preco_compra,
+        ':preco_venda' => $preco_venda,
+    ]);
+}
+
+
+function lerDados($pdo)
+{
+
+    $sql = 'SELECT * FROM produto';
+
+    $statement = $pdo->query($sql);
+
+    $publishers = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+    $json = json_encode($publishers);
+
+    header('Content-Type: application/json');
+    echo $json;
+}
+
+

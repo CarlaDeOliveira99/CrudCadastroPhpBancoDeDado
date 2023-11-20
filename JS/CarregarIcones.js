@@ -14,7 +14,7 @@ window.addEventListener('load', function () {
     imgPrecoIni.src = "iconesImagensGifs/ambasAsSetas.png"
     imgPrecoFin.src = "iconesImagensGifs/ambasAsSetas.png"
 
-   
 
+    window.atualizarTabela();
 
 })

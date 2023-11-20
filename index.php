@@ -50,8 +50,8 @@
                 <p id="txtProduto">Produto <input id="campoProd" name="produto" type="text"></p>
                 <span id="txtQuantidade">Quantidade <input id="quantidade" class="campoDados" name="quantidade" type="number" step="1" min="1"></span>
                 <span id="txtUnidade">Unidade <input class="campoDados" id="unidade" name="unidade" type="text" min="0"></span>
-                <p id="txtPrecoIni" class="txtPreco">Preço de Compra <input id="precoInicial" class="campoPreco" name="precoInicial" type="text" data-thousands="." data-decimal="," data-prefix="R$ "></p>
-                <p id="txtPrecoFinal" class="txtPreco">Preço de Venda <input id="precoFinal" name="precoFinal" class="campoPreco" type="text" data-thousands="." data-decimal="," data-prefix="R$ "></p>
+                <p id="txtPrecoIni" class="txtPreco">Preço de Compra <input id="precoInicial" class="campoPreco" name="precoInicial" type="number"></p>
+                <p id="txtPrecoFinal" class="txtPreco">Preço de Venda <input id="precoFinal" name="precoFinal" class="campoPreco" type="number"></p>
             </div>
 
         </div>
