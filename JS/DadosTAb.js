@@ -77,6 +77,17 @@ document.getElementById("btnModalCadastrar").addEventListener('click', function 
 }
 
 
+
+function limparCampoCadastro() {
+    document.getElementById('campoProd').value = ''
+    document.getElementById('quantidade').value = ''
+    document.getElementById('unidade').value = ''
+    document.getElementById('precoInicial').value = ''
+    document.getElementById('precoFinal').value = ''
+}
+
+
 window.atualizarTabela = atualizarTabela;
+window.limparCampoCadastro = limparCampoCadastro;
 
 
