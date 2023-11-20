@@ -12,9 +12,8 @@ if ($tipo == 'ler') {
 } else if ($tipo == 'cadastrar') {
     cadastrar($pdo);
 } else if ($tipo == 'deletar') {
-  
 } else if ($tipo == 'alterar') {
-   
+    alterar($pdo);
 }
 
 
@@ -44,7 +43,7 @@ function cadastrar($pdo)
 }
 
 
-function lerDados($pdo)
+function lerDados($pdo,)
 {
 
     $sql = 'SELECT * FROM produto';
@@ -60,3 +59,42 @@ function lerDados($pdo)
 }
 
 
+function alterar($pdo)
+{
+    $json_convertido = json_decode(file_get_contents('php://input'), true);
+    $id = $json_convertido['id'];
+    $nome = $json_convertido['nome'];
+    $quantidade = $json_convertido['quantidade'];
+    $unidade = $json_convertido['unidade'];
+    $preco_compra  = $json_convertido['precoInicial'];
+    $preco_venda = $json_convertido['precoFinal'];
+
+
+    $publisher = [
+        'publisher_id' => $id,
+        'nome' => $nome,
+        'quantidade' => $quantidade,
+        'unidade' => $unidade,
+        'preco_compra' => $preco_compra,
+        'preco_venda' => $preco_venda,
+    ];
+
+    $sql = 'UPDATE produto
+        SET nome = :nome
+        quantidade = :quantidade
+        unidade = :unidade
+        preco_compra = :preco_compra
+        preco_venda = :preco_venda
+        WHERE id = :publisher_id';
+
+    $statement = $pdo->prepare($sql);
+
+    $statement->bindParam(':nome', $publisher['nome']);
+    $statement->bindParam(':quantidade', $publisher['quantidade']);
+    $statement->bindParam(':unidade', $publisher['unidade']);
+    $statement->bindParam(':preco_compra', $publisher['preco_compra']);
+    $statement->bindParam(':preco_venda', $publisher['preco_venda']);
+
+
+    $statement->execute();
+}

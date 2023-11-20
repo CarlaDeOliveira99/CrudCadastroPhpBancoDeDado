@@ -1,28 +1,70 @@
-
-document.getElementById("btnModalCadastrar").addEventListener('click', function dadosColetados() {
+function coletar_dados() {
     let produto = {}
 
-
+    produto.id = document.getElementById('campoID').value
     produto.nome = document.getElementById('campoProd').value
     produto.quantidade = document.getElementById('quantidade').value
     produto.unidade = document.getElementById('unidade').value
     produto.precoInicial = document.getElementById('precoInicial').value
     produto.precoFinal = document.getElementById('precoFinal').value
 
+    return produto;
+}
 
+
+function cadastrar(produto) {
+   
     fetch('Php/arquivo.php?tipo=cadastrar', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(produto),
-    })  .then((res) => {
+    }).then((res) => {
         atualizarTabela();
     })
-       
-})
+}
 
-  function atualizarTabela() {
+
+
+
+function funcaoAlterar(event) {
+
+    document.getElementById('btnModalCadastrar').style.display = 'none'
+    document.getElementById('alterar').style.display = 'inline'
+
+    modal.classList.toggle("hide");
+    fundoModal.classList.toggle("hide");
+
+    let itemClicado = event.target.parentElement.parentElement.childNodes
+    let id = itemClicado[0].innerText
+
+    fetch('Php/arquivo.php?tipo=ler')
+        .then(res => res.json())
+        .then(resposta =>
+            resposta.forEach(element => {
+                if (id == element.id) {
+                    document.getElementById('campoID').value = element.id
+                    document.getElementById('campoProd').value = element.nome
+                    document.getElementById('quantidade').value = element.quantidade
+                    document.getElementById('unidade').value = element.unidade
+                    document.getElementById('precoInicial').value = element.preco_de_compra
+                    document.getElementById('precoFinal').value = element.preco_de_venda
+                }
+            }))  
+}
+
+
+function limparCampoCadastro() {
+    document.getElementById('campoProd').value = ''
+    document.getElementById('quantidade').value = ''
+    document.getElementById('unidade').value = ''
+    document.getElementById('precoInicial').value = ''
+    document.getElementById('precoFinal').value = ''
+}
+
+
+function atualizarTabela() {
     let tbody = document.getElementById('tbody')
     tbody.innerHTML = '';
 
@@ -48,7 +90,7 @@ document.getElementById("btnModalCadastrar").addEventListener('click', function 
                 this.quantidade.innerHTML = obj.quantidade;
                 this.unidade.innerHTML = obj.unidade;
                 this.precoInicial.innerHTML = obj.preco_de_compra;
-                this.precoFinal.innerHTML = obj. preco_de_venda;
+                this.precoFinal.innerHTML = obj.preco_de_venda;
 
 
                 this.id.classList.add('center')
@@ -73,21 +115,12 @@ document.getElementById("btnModalCadastrar").addEventListener('click', function 
                 tdacoes.appendChild(imgExcluir)
             }))
 
-         
+
 }
-
-
-
-function limparCampoCadastro() {
-    document.getElementById('campoProd').value = ''
-    document.getElementById('quantidade').value = ''
-    document.getElementById('unidade').value = ''
-    document.getElementById('precoInicial').value = ''
-    document.getElementById('precoFinal').value = ''
-}
-
 
 window.atualizarTabela = atualizarTabela;
 window.limparCampoCadastro = limparCampoCadastro;
+window.coletar_dados = coletar_dados;
+window. cadastrar =  cadastrar;
 
 

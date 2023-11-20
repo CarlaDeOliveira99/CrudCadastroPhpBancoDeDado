@@ -15,14 +15,6 @@ window.addEventListener('load', function () {
     imgPrecoFin.src = "iconesImagensGifs/ambasAsSetas.png"
 
 
-
-    this.document.getElementById('btnAdicionar').addEventListener('click', function () {
-        document.getElementById('btnModalCadastrar').style.display = 'inline'
-        document.getElementById('alterar').style.display = 'none'
-        window.limparCampoCadastro();
-    })
-
     window.atualizarTabela();
   
-
 })
