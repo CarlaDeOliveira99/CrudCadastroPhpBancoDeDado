@@ -13,7 +13,7 @@ function coletar_dados() {
 
 
 function cadastrar(produto) {
-   
+
     fetch('Php/arquivo.php?tipo=cadastrar', {
         method: 'POST',
         headers: {
@@ -21,11 +21,9 @@ function cadastrar(produto) {
         },
         body: JSON.stringify(produto),
     }).then((res) => {
-        atualizarTabela();
+        atualizarTabela('ler');
     })
 }
-
-
 
 
 function funcaoAlterar(event) {
@@ -51,7 +49,7 @@ function funcaoAlterar(event) {
                     document.getElementById('precoInicial').value = element.preco_de_compra
                     document.getElementById('precoFinal').value = element.preco_de_venda
                 }
-            }))  
+            }))
 }
 
 
@@ -67,10 +65,51 @@ function funcaoDeletar(event) {
         method: 'DELETE'
     })
         .then((res) => {
-           atualizarTabela();
+            atualizarTabela('ler');
         })
 
-} 
+}
+
+function ordenar_home() {
+    this.fetch('Php/arquivo.php?tipo=ordenar_home', {
+        method: 'GET',
+    })
+        .then((res) => {
+            window.atualizarTabela('ordenar_home');
+        })
+}
+
+function atualizar_seta_ordenar(categoria, direcao_seta) {
+
+    let id_img = categoria.children[0].id;
+    let seta_atual = '';
+
+
+    if (direcao_seta == "iconesImagensGifs/ambasAsSetas.png") {
+       document.getElementById(id_img).src = "iconesImagensGifs/ordenarCima.png";
+        seta_atual = "ASC"
+    } else if (direcao_seta == "iconesImagensGifs/ordenarCima.png") {
+        document.getElementById(id_img).src = "iconesImagensGifs/ordenarBaixo.png";
+        seta_atual = "DESC"
+    } else {
+        document.getElementById(id_img).src= "iconesImagensGifs/ambasAsSetas.png";
+       return ordenar_home()
+    }
+
+    let categoria_selecionada = categoria.innerText;
+
+
+    this.fetch('Php/arquivo.php?tipo=ordenar_categoria&seta=' + seta_atual + '&categoria=' + categoria_selecionada, {
+        method: 'GET',
+    })
+        .then((res) => {
+            window.atualizarTabela('ordenar_categoria&seta=' + seta_atual + '&categoria=' + categoria_selecionada);
+        })
+
+}
+
+
+
 
 function limparCampoCadastro() {
     document.getElementById('campoProd').value = ''
@@ -80,12 +119,13 @@ function limparCampoCadastro() {
     document.getElementById('precoFinal').value = ''
 }
 
-
-function atualizarTabela() {
+function atualizarTabela(acao) {
     let tbody = document.getElementById('tbody')
     tbody.innerHTML = '';
 
-    fetch('Php/arquivo.php?tipo=ler')
+    fetch('Php/arquivo.php?tipo=' + acao, {
+        method: "GET"
+    })
         .then(res => res.json())
         .then(resposta =>
             resposta.forEach(element => {
@@ -113,7 +153,7 @@ function atualizarTabela() {
                 this.id.classList.add('center')
                 this.produto.classList.add('tdInfo')
                 this.quantidade.classList.add('center')
-                this.unidade.classList.add('tdInfo')
+                this.unidade.classList.add('center')
                 this.precoInicial.classList.add('center')
                 this.precoFinal.classList.add('center')
 
@@ -138,6 +178,8 @@ function atualizarTabela() {
 window.atualizarTabela = atualizarTabela;
 window.limparCampoCadastro = limparCampoCadastro;
 window.coletar_dados = coletar_dados;
-window. cadastrar =  cadastrar;
+window.cadastrar = cadastrar;
+window.atualizar_seta_ordenar = atualizar_seta_ordenar;
+window.ordenar_home = ordenar_home;
 
 

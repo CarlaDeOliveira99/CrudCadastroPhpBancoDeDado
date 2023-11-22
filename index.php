@@ -62,7 +62,7 @@
     </div>
 
     <script src="JS/ModalCadastro.js" async defer></script>
-    <script src="JS/CarregarIcones.js" async defer></script>
+    <script src="JS/Carregar_icones.js" async defer></script>
     <script src="JS/DadosTAb.js" async defer></script>
     <script src="JS/Event_Listener.js" async defer></script>
 

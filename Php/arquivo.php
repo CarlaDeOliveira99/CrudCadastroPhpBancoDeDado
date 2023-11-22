@@ -15,6 +15,10 @@ if ($tipo == 'ler') {
     deletar($pdo);
 } else if ($tipo == 'alterar') {
     alterar($pdo);
+} else if ($tipo == 'ordenar_home') {
+    ordenar_home($pdo);
+} else if ($tipo == 'ordenar_categoria') {
+    ordenar_categoria($pdo);
 }
 
 
@@ -98,10 +102,69 @@ function deletar($pdo)
     $statement->execute();
 }
 
+function ordenar_home($pdo)
+{
+    $statement = $pdo->query("SELECT * FROM produto ORDER BY id ASC");
+
+    $statement->execute();
+
+    $resultados = $statement->fetchAll();
+
+    $json = json_encode($resultados);
+
+    echo $json;
+}
+
+
+function ordenar_categoria($pdo)
+{
+
+    if (isset($_GET['categoria']) ? $_GET['categoria'] : "null") {
+        $categoria = $_GET['categoria'];
+    }
+
+    if (isset($_GET['seta']) ? $_GET['seta'] : "null") {
+        $seta = $_GET['seta'];
+    } 
+
+    $categoria_atualizada = categoria_selecionada($categoria);
+
+    if ($seta == 'ASC') {
+        $statement = $pdo->prepare("SELECT * FROM produto ORDER BY $categoria_atualizada ASC");
+    }else {
+        $statement = $pdo->prepare("SELECT * FROM produto ORDER BY $categoria_atualizada DESC");
+    }
+
+
+    $statement->execute();
+
+    $resultados = $statement->fetchAll();
+
+    $json = json_encode($resultados);
+
+    header('Content-Type: application/json');
+    echo $json;
+}
+
+function categoria_selecionada($categoria)
+{
+    if (trim($categoria) == "Cód") {
+        return $categoria = "id";
+    } elseif (trim($categoria) == "Produto") {
+        return  $categoria = "nome";
+    } elseif (trim($categoria) == "Quantidade") {
+        return  $categoria = "quantidade";
+    } elseif (trim($categoria) == "Unidade") {
+        return  $categoria = "unidade";
+    } elseif (trim($categoria) == "Preço de Compra") {
+        return  $categoria = "preco_de_compra";
+    } elseif (trim($categoria) == "Preço de Venda") {
+        return  $categoria = "preco_de_venda";
+    }
+}
 
 function lerDados($pdo)
 {
-
     $sql = 'SELECT * FROM produto';
 
     $statement = $pdo->query($sql);
