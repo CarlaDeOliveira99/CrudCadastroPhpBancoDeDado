@@ -26,7 +26,6 @@ document.getElementById('linhaTituloTab').addEventListener('click', (event) => {
 
     let direcao_seta = event.target.childNodes[1].attributes.src.nodeValue
     let categoria = event.target;
-
     window.atualizar_seta_ordenar(categoria,direcao_seta)
 
 })
