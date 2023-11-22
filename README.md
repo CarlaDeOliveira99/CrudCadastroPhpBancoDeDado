@@ -8,24 +8,34 @@
 <h2>Criar a tabela do banco de dados (PostgreSQL)</h2>
 
 <h3>Criar Sequences</h3>
-  CREATE SEQUENCE seq_id_produto<br>
-  START 1<br>
-  INCREMENT 1;<br>
 
+```
+  CREATE SEQUENCE seq_id_produto<br>
+  START 1
+  INCREMENT 1;
+```
 
 <h3>Criar Tabela</h3>
-  CREATE TABLE produto ( <br>
-  id **integer** NOT NULL default nextval('seq_id_produto'), <br>
-  nome varchar(100),<br>
-  quantidade integer NOT NULL,<br>
-  unidade varchar(10) NOT NULL,<br>
-  preco_de_compra numeric(12,2) NOT NULL,<br>
-  preco_de_venda numeric(12,2) NOT NULL<br>
-);<br>
 
-<h3>Criar Constraints</h3>
-alter table produto add constraint pk_produto primary key(id);<br>
-alter table produto add constraint unique_nome unique(nome);<br>
+```
+CREATE TABLE produto (
+    id integer NOT NULL default nextval('seq_id_produto'), 
+    nome varchar(100),
+    quantidade integer NOT NULL,
+    unidade varchar(10) NOT NULL,
+    preco_de_compra numeric(12,2) NOT NULL,
+    preco_de_venda numeric(12,2) NOT NULL
+);
+```
+
+<h3 color="#1a7edb">Criar Constraints</h3>
+
+```
+alter table produto add constraint pk_produto primary key(id);
+alter table produto add constraint unique_nome unique(nome);
+```
+
+
 
 **[⬆ Inicio](#CrudCadastroPhpBancoDeDados)**
 
