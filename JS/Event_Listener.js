@@ -30,3 +30,7 @@ document.getElementById('linhaTituloTab').addEventListener('click', (event) => {
     window.atualizar_seta_ordenar(categoria,direcao_seta)
 
 })
+
+document.getElementById('campoPesquisa').addEventListener('keyup', function () {
+  window.pesquisar();
+})

@@ -86,14 +86,14 @@ function atualizar_seta_ordenar(categoria, direcao_seta) {
 
 
     if (direcao_seta == "iconesImagensGifs/ambasAsSetas.png") {
-       document.getElementById(id_img).src = "iconesImagensGifs/ordenarCima.png";
+        document.getElementById(id_img).src = "iconesImagensGifs/ordenarCima.png";
         seta_atual = "ASC"
     } else if (direcao_seta == "iconesImagensGifs/ordenarCima.png") {
         document.getElementById(id_img).src = "iconesImagensGifs/ordenarBaixo.png";
         seta_atual = "DESC"
     } else {
-        document.getElementById(id_img).src= "iconesImagensGifs/ambasAsSetas.png";
-       return ordenar_home()
+        document.getElementById(id_img).src = "iconesImagensGifs/ambasAsSetas.png";
+        return ordenar_home()
     }
 
     let categoria_selecionada = categoria.innerText;
@@ -117,6 +117,44 @@ function limparCampoCadastro() {
     document.getElementById('unidade').value = ''
     document.getElementById('precoInicial').value = ''
     document.getElementById('precoFinal').value = ''
+}
+
+
+function pesquisar() {
+    let campoPesquisaDigitado = document.getElementById('campoPesquisa');
+    let dadosTabela = document.querySelectorAll('.trInfor');
+    dadosTabela.forEach(element => {
+        let inforLista = element.textContent.toLocaleLowerCase().trim()
+        let txtCampoPesquisa = campoPesquisaDigitado.value.toLocaleLowerCase().trim()
+
+        if (inforLista.includes(txtCampoPesquisa)) {
+            let dadosDaTD = element.children
+
+            for (let i = 0; i < dadosDaTD.length; i++) {
+                let textoTab = dadosDaTD[i].innerText
+
+                if (textoTab.includes(txtCampoPesquisa)) {
+                    let letrasTab = textoTab.split('')
+                    let letrasCampPesquisa = txtCampoPesquisa.split('')
+
+                    for (let j = 0; j < letrasTab.length; j++) {
+                        for (let x = 0; x < letrasCampPesquisa.length; x++) {
+                            if (letrasTab[j] == letrasCampPesquisa[x]) {
+                                letrasTab[j] = `<span>${letrasTab[j]}</span>`
+                            }
+                        }
+                    }
+                    textoTab = letrasTab.join("");
+                    dadosDaTD[i].innerHTML = textoTab;
+                }
+            }
+        } else {
+            element.remove()
+        }
+    });
+    if (campoPesquisaDigitado.value.trim() == '') {
+        atualizarTabela('ler')
+    }
 }
 
 function atualizarTabela(acao) {
@@ -171,15 +209,14 @@ function atualizarTabela(acao) {
                 tdacoes.appendChild(imgEditar)
                 tdacoes.appendChild(imgExcluir)
             }))
-
-
 }
 
-window.atualizarTabela = atualizarTabela;
-window.limparCampoCadastro = limparCampoCadastro;
 window.coletar_dados = coletar_dados;
 window.cadastrar = cadastrar;
-window.atualizar_seta_ordenar = atualizar_seta_ordenar;
+window.limparCampoCadastro = limparCampoCadastro;
 window.ordenar_home = ordenar_home;
+window.atualizar_seta_ordenar = atualizar_seta_ordenar;
+window.pesquisar =  pesquisar;
+window.atualizarTabela = atualizarTabela;
 
 
