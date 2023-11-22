@@ -28,7 +28,7 @@ CREATE TABLE produto (
 );
 ```
 
-<h3 color="#1a7edb">Criar Constraints</h3>
+<h3> <span style="color:blue">Criar Constraints</span></h3>
 
 ```
 alter table produto add constraint pk_produto primary key(id);
