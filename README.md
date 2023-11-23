@@ -60,7 +60,7 @@ $password = '';
 **[⬆ Inicio](#CrudCadastroPhpBancoDeDados-)**
 
 ## Cadastrar os dados
-<p>Para a tela de cadastro, foi utilizado um modal. Após clicar em ‘salvar’, os dados são salvos no banco de dados. </p>
+<p>Para a tela de cadastro, foi utilizado um modal. Após clicar em ‘salvar’, os dados são salvos no banco de dados postgreSQL. </p>
 
 <img src="iconesImagensGifs/cadastrar-.gif" width="850">
 
